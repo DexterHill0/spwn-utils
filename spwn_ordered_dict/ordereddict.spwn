@@ -8,8 +8,8 @@ new_wo_key = (dict, key) {
 	return new
 }
 
-b64e = (k) {return $.b64encode(k)}
-b64d = (k) {return $.b64decode(k)}
+b64e = $.b64encode
+b64d = $.b64decode
 
 type @ordereddict
 impl @ordereddict {
