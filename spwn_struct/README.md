@@ -54,5 +54,5 @@ The module exposes the `@struct` type.
 >| # | name | type | default value | description |
 >| - | ---- | ---- | ------------- | ----------- |
 >| 1 | **`struct`** |any | |The struct to populate. |
->| 2 | **`vals`** |any | |The values to populate the struct with. Must be in the order members. |
+>| 2 | **`vals`** |any | |The values to populate the struct with. The order of the values should match the order the members were given in `struct::n`. |
 >
