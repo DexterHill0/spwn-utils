@@ -16,10 +16,10 @@ The module exposes 1 public function:
 >
 >| # | name | type | default value | description |
 >| - | ---- | ---- | ------------- | ----------- |
->| 1 | **`object`** | `@dictionary|@array|@macro` | |The object to pretty-print. Can be of type `@dictionary`, `@array` or `@macro` |
+>| 1 | **`object`** | `@dictionary\|@array\|@macro` | |The object to pretty-print. Can be of type `@dictionary`, `@array` or `@macro` |
 >| 2 | `spaces` | `@number` | `4` |The number of padding spaces to print each element with. Default is `4` |
 >| 3 | `recurse_objects` | `@bool` | `true` |Will recursively loop over any nested objects and pretty print those too. Default is `true` |
->| 4 | `key_sort` | `@ASCENDING|@DESCENDING` | `@ASCENDING` |The order in which the keys of a dictionary will be sorted. Default is `@ASCENDING`. |
+>| 4 | `key_sort` | `@ASCENDING\|@DESCENDING` | `@ASCENDING` |The order in which the keys of a dictionary will be sorted. Default is `@ASCENDING`. |
 
 
 ## Example
