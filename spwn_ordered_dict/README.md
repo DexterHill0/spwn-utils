@@ -7,7 +7,7 @@ Import the library like shown:
 extract import "spwn_ordered_dict"
 ```
 
-The module exposes the `@ordereddict` class. Create a new, empty ordered dictionary:
+The module exposes the `@ordereddict` type. Create a new, empty ordered dictionary:
 ```
 let od = @ordereddict::new()
 ```

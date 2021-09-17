@@ -1,0 +1,50 @@
+type @struct
+impl @struct {
+
+    n: #[
+		desc("The function that creates the base struct.")
+		example("
+let struct = @struct::n([
+	{ member1: @string },
+	{ member2: @number },
+])	
+			")
+		]
+	(
+		#[ desc("An array of objects, where each object has a member name and type for a member in the struct.") ]
+		args
+	) {
+        return @struct::{s:args}
+    },
+
+    c: #[
+		desc("Populates a given struct with values that match the types of the members of that struct.")
+		example("
+let struct_populated = @struct::c(x, [\"member1_value\", 3])
+		")
+		]
+	(
+		#[desc("The struct to populate.")]
+		struct,
+		#[desc("The values to populate the struct with. Must be in the order members.")]
+		vals
+	) {
+        let s = @struct::{}
+
+        for i in 0..struct.s.length {
+            items = struct.s[i].items()[0]
+			
+            if vals[i].type != items[1] {
+                throw "Error: Struct argument: {} ({}) expected {}, but got {}!".fmt([i, items[0], items[1], vals[i].type])
+            }
+
+            s[items[0]] = vals[i]
+        }
+
+        return s
+    },
+}
+
+return {
+	struct: @struct,
+}
