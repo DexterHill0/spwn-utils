@@ -111,14 +111,6 @@ impl @ordereddict {
 		return self._dict.map(v => macro(v))
 	},
 
-	clone: #[desc("Creates an identical clone of the ordered dictionary.")]
-	(self) {
-		let new = @ordereddict::new()
-		new._map = self._map
-		new._dict = self._dict
-		return new
-	},
-
 	clone_without: #[desc("Create a clone of the ordered dictionary, with the provided keys removed.")]
 	(
 		self,
@@ -179,6 +171,9 @@ impl @ordereddict {
 	_as_: (self, type_indicator) {
 		if type_indicator == @string {
 			return "ordereddict::{" + ", ".join(self._dict.map(v => "{}: {}".fmt([v[0], v[1]]))) + "}"
+		}
+		else if type_indicator == @dictionary {
+			return self.to_unordered_dict()
 		}
 		return null
 	},
