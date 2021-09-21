@@ -1,3 +1,5 @@
+# ARCHIVED - (now included in std)
+
 # spwn-ordered-dict
 A dictionary that keeps the order of the keys within.
 

@@ -4,4 +4,4 @@ Contains a collection of useful SPWN utils.
 ----------------
 ### spwn-pprint
 ### spwn-ordered-dict
-### spwn-struct
+### spwn-struct (archived - in std by default)
