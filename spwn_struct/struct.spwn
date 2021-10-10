@@ -1,48 +1,50 @@
 type @struct
 impl @struct {
 
-    n: #[
-		desc("The function that creates the base struct.")
-		example("
-let struct = @struct::n([
-	{ member1: @string },
-	{ member2: @number },
-])	
-			")
-		]
-	(
-		#[ desc("An array of objects, where each object has a member name and type for a member in the struct.") ]
-		args
-	) {
-        return @struct::{s:args}
-    },
+	new: (values) {
+		let curr_struct
+		let cleaned = {}
 
-    c: #[
-		desc("Populates a given struct with values that match the types of the members of that struct.")
-		example("
-let struct_populated = @struct::c(x, [\"member1_value\", 3])
-		")
-		]
-	(
-		#[desc("The struct to populate.")]
-		struct,
-		#[desc("The values to populate the struct with. Must be in the order members.")]
-		vals
-	) {
-        let s = @struct::{}
+		for v in values {
+			if $.matches(v[1], @struct) {
+				curr_struct = v[1]
+			}
+			else {
+				cleaned[v[0]] = v[1]
+			}
+		}
 
-        for i in 0..struct.s.length {
-            items = struct.s[i].items()[0]
-			
-            if vals[i].type != items[1] {
-                throw "Error: Struct argument: {} ({}) expected {}, but got {}!".fmt([i, items[0], items[1], vals[i].type])
-            }
+		if curr_struct == null {
+			throw "Missing struct in arguments!"
+		}
 
-            s[items[0]] = vals[i]
-        }
+		if cleaned.keys().length < curr_struct.keys().length {
+			throw "Expected {} parameters, got {} when constructing `@struct`".fmt([curr_struct.keys().length, cleaned.keys().length])
+		}
 
-        return s
-    },
+		let new = @struct::{}
+
+		for k in cleaned.keys() {
+			if $.matches(cleaned[k], curr_struct[k]) {
+				new[k] = cleaned[k]
+			}
+			else {
+				throw "Type `{}` does not match the type `{}` specified for struct field: `{}`".fmt([cleaned[k].type, curr_struct[k], k])
+			}
+		}
+
+		return new
+	},
+
+	keys: (self) {
+		let new = []
+		for x in self {
+			if x[0] != "type" {
+				new.push(x[0])
+			}
+		}
+		return new
+	}
 }
 
 return {

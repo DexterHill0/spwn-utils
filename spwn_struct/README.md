@@ -11,48 +11,24 @@ The module exposes the `@struct` type.
 
 <br>
 
-## Macros:
+## Usage:
 
-## **n**:
+### Creating the struct
+```rs
+let my_struct = @struct::{
+	member1: @string,
+	member2: @number,
+}
+```
 
-> **Printed:** 
->```spwn
->(args) { /* code omitted */ }
->``` 
->**Type:** `@macro` 
->## Description: 
-> _The function that creates the base struct._
->### Example: 
->```spwn
-> let struct = @struct::n([
->	{ member1: @string },
->	{ member2: @number },
->])
->```
->## Arguments:
->
->| # | name | type | default value | description |
->| - | ---- | ---- | ------------- | ----------- |
->| 1 | **`args`** |any | |An array of objects, where each object has a member name and type for a member in the struct. |
->
+### Populating the struct
+```rs
+let populated_struct = @struct::new({
+	my_struct,
 
-## **c**:
-
-> **Printed:** 
->```spwn
->(struct, vals) { /* code omitted */ }
->``` 
->**Type:** `@macro` 
->## Description: 
-> _Populates a given struct with values that match the types of the members of that struct._
->### Example: 
->```spwn
-> let struct_populated = @struct::c(x, ["member1_value", 3])
->```
->## Arguments:
->
->| # | name | type | default value | description |
->| - | ---- | ---- | ------------- | ----------- |
->| 1 | **`struct`** |any | |The struct to populate. |
->| 2 | **`vals`** |any | |The values to populate the struct with. The order of the values should match the order the members were given in `struct::n`. |
->
+	member1: "fdf",
+	member2: 10,
+})
+```
+* The empy struct must always be provided in the call to `new`. 
+* All fields must be populated, with values of the same type as defined in the struct.
